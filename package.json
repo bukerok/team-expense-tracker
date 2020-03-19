@@ -1,0 +1,19 @@
+{
+  "name": "company-wallet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --watch --open"
+  },
+  "keywords": [],
+  "author": "Alexander Bukley",
+  "license": "ISC",
+  "dependencies": {
+    "lit-element": "2.2.1"
+  },
+  "devDependencies": {
+    "es-dev-server": "1.45.2"
+  }
+}
