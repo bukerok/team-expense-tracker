@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 class ExpenseInput extends LitElement {
   static get properties() {
@@ -6,6 +6,14 @@ class ExpenseInput extends LitElement {
       users: { type: Array },
       rounding: { type: Number },
     };
+  }
+
+  static get styles() {
+    return css`
+      .number-input {
+        width: 50px;
+      }
+    `;
   }
 
   users = [];
@@ -30,8 +38,21 @@ class ExpenseInput extends LitElement {
               return html`
                 <tr>
                   <td>${name}</td>
-                  <td><input data-type="participated" data-id="${name}" type="checkbox"></td>
-                  <td><input data-type="paid" type="number" data-id="${name}"></td>
+                  <td>
+                    <input
+                      data-type="participated"
+                      data-id="${name}"
+                      type="checkbox"
+                    >
+                    </td>
+                  <td>
+                    <input
+                      data-type="paid"
+                      data-id="${name}"
+                      type="number"
+                      class="number-input"
+                    >
+                  </td>
                   <td>${this.resultData[name]}</td>
                 </tr>
               `;
@@ -69,7 +90,22 @@ class ExpenseInput extends LitElement {
   }
 
   logListener() {
-    console.log('result', this.resultData);
+    const participants= Object.keys(this.resultData)
+      .map((key) => [key, this.resultData[key]])
+      .filter(([, value]) => !!value);
+
+    if (participants.length === 0) {
+      return;
+    }
+
+    this.dispatchEvent(new CustomEvent('expense-log', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        participants,
+      },
+    }));
+    // TODO reset input table
   }
 
   updateResult() {
@@ -86,7 +122,11 @@ class ExpenseInput extends LitElement {
       }
     });
 
-    const share = Math.ceil((totalPaid / totalParticipated) / this.rounding) * this.rounding;
+    let share = totalPaid / totalParticipated;
+
+    if (this.rounding !== 0) {
+      share = Math.ceil(share / this.rounding) * this.rounding;
+    }
 
     this.additionalData.forEach(({ id, paid = 0, participated }) => {
       let result = paid;
