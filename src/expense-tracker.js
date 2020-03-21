@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import './expense-input.js';
 import './expense-logs.js';
 
@@ -9,6 +9,14 @@ class ExpenseTracker extends LitElement {
     return {
       users: { type: Array },
     };
+  }
+
+  static get styles() {
+    return css`
+      h1 {
+        text-align: center;
+      }
+    `;
   }
 
   logs;
@@ -30,6 +38,7 @@ class ExpenseTracker extends LitElement {
         .users="${this.users}"
         @expense-log="${this.logExpense}"
       ></expense-input>
+      <h3>History</h3>
       <expense-logs .logs="${this.logs}"></expense-logs>
     `;
   }

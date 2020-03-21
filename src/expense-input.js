@@ -10,8 +10,46 @@ class ExpenseInput extends LitElement {
 
   static get styles() {
     return css`
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .table {
+        margin-bottom: 16px;
+        border-collapse: collapse;
+      }
+
+      .table__head {
+        border-bottom: 2px solid #BDBDBD;
+      }
+
+      .header-cell {
+        padding: 8px 0;
+      }
+
+      .row {
+        border-bottom: 1px solid #BDBDBD;
+      }
+
+      .cell {
+        padding: 2px 0;
+        text-align: center;
+      }
+
+      .cell__name {
+        text-align: left;
+      }
+
+      .checkbox {
+        width: 20px;
+        height: 20px;
+      }
+
       .number-input {
         width: 50px;
+        height: 20px;
+        text-align: center;
       }
     `;
   }
@@ -23,29 +61,30 @@ class ExpenseInput extends LitElement {
 
   render(){
     return html`
-      <div>
-        <table>
-          <thead>
+      <div class="wrapper">
+        <table class="table">
+          <thead class="table__head">
             <tr>
-              <th>User</th>
-              <th>Participated</th>
-              <th>Paid</th>
-              <th>Result</th>
+              <th class="header-cell">User</th>
+              <th class="header-cell">Joined</th>
+              <th class="header-cell">Paid</th>
+              <th class="header-cell">Result</th>
             </tr>
           </thead>
           <tbody @change="${this.inputChangeListener}">
             ${this.users.map(({ name }) => {
               return html`
-                <tr>
-                  <td>${name}</td>
-                  <td>
+                <tr class="row">
+                  <td class="cell__name">${name}</td>
+                  <td class="cell">
                     <input
                       data-type="participated"
                       data-id="${name}"
                       type="checkbox"
+                      class="checkbox"
                     >
                     </td>
-                  <td>
+                  <td class="cell">
                     <input
                       data-type="paid"
                       data-id="${name}"
@@ -53,13 +92,13 @@ class ExpenseInput extends LitElement {
                       class="number-input"
                     >
                   </td>
-                  <td>${this.resultData[name]}</td>
+                  <td class="cell">${this.resultData[name]}</td>
                 </tr>
               `;
             })}
           </tbody>
         </table>
-        <button @click="${this.logListener}">Log</button>
+        <button @click="${this.logListener}">Add</button>
       </div>
     `;
   }
