@@ -64,7 +64,8 @@ class ExpenseLogs extends LitElement {
   render() {
     return html`
       <ul class="logs">
-        ${this.logs.map(({ _metadata, participants }) => html`
+        ${this.logs.map(({ _metadata, participants }) => {
+          return html`
             <li class="log-item">
               <div class="log-item__participants">
                 ${participants.map(([name, value]) => html`
@@ -85,7 +86,8 @@ class ExpenseLogs extends LitElement {
                 ${(new Date(_metadata.date).toDateString())}
               <div>
             </li>
-      `)}
+          `;
+        })}
       </ul>
     `;
   }

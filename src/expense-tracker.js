@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import './expense-input.js';
 import './expense-logs.js';
+import './expense-table.js';
 
 const EXPENSE_LOGS_KEY = 'expense-logs';
 
@@ -39,6 +40,7 @@ class ExpenseTracker extends LitElement {
         @expense-log="${this.logExpense}"
       ></expense-input>
       <h3>History</h3>
+      <expense-table .logs="${this.logs}"></expense-table>
       <expense-logs .logs="${this.logs}"></expense-logs>
     `;
   }
