@@ -15,7 +15,6 @@ class ExpenseLogs extends LitElement {
       }
 
       .logs {
-        max-width: 500px;
         list-style-type: none;
         margin: 0;
         padding: 8px;
@@ -62,6 +61,12 @@ class ExpenseLogs extends LitElement {
   }
 
   render() {
+    if (this.logs.length === 0) {
+      return html`
+        No logs.
+      `;
+    }
+
     return html`
       <ul class="logs">
         ${this.logs.map(({ _metadata, participants }) => {

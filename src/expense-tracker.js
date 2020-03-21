@@ -14,8 +14,19 @@ class ExpenseTracker extends LitElement {
 
   static get styles() {
     return css`
+      :host {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       h1 {
         text-align: center;
+      }
+
+      .wrapper {
+        max-width: 500px;
+        width: 100%;
       }
     `;
   }
@@ -30,18 +41,17 @@ class ExpenseTracker extends LitElement {
 
   render() {
     return html`
-      <h1>Expense Tracker</h1>
-      <div>
-        <a href="#/logger">Logger</a>
-        <a href="#/stats">Stats</a>
+      <div class="wrapper">
+        <h1>Expense Tracker</h1>
+        <expense-input
+          .users="${this.users}"
+          @expense-log="${this.logExpense}"
+        ></expense-input>
+        <h3>Balances</h3>
+        <expense-table .logs="${this.logs}"></expense-table>
+        <h3>Log</h3>
+        <expense-logs .logs="${this.logs}"></expense-logs>
       </div>
-      <expense-input
-        .users="${this.users}"
-        @expense-log="${this.logExpense}"
-      ></expense-input>
-      <h3>History</h3>
-      <expense-table .logs="${this.logs}"></expense-table>
-      <expense-logs .logs="${this.logs}"></expense-logs>
     `;
   }
 
