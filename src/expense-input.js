@@ -144,7 +144,16 @@ class ExpenseInput extends LitElement {
         participants,
       },
     }));
-    // TODO reset input table
+    this.shadowRoot.querySelectorAll('input[type="checkbox"]')
+      .forEach((element) => {
+        element.checked = false;
+      });
+    this.shadowRoot.querySelectorAll('input[type="number"]')
+      .forEach((element) => {
+        element.value = '';
+      });
+    this.resultData = {};
+    this.requestUpdate();
   }
 
   updateResult() {
