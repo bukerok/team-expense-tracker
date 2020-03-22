@@ -63,7 +63,7 @@ class ExpenseTable extends LitElement {
               'card__value': true,
               'card__value_negative': accumulation < 0,
             })}"
-          >${accumulation}</span>
+          >${accumulation.toFixed(2)}</span>
         </div>
         ${
           Object.keys(table)
