@@ -78,7 +78,7 @@ class ExpenseTable extends LitElement {
                       'card__value': true,
                       'card__value_negative': value < 0,
                     })}"
-                  >${value}</span>
+                  >${value.toFixed(2)}</span>
                 </div>
               `;
             })
