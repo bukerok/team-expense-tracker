@@ -51,6 +51,17 @@ class ExpenseInput extends LitElement {
         height: 20px;
         text-align: center;
       }
+
+      .submit {
+        height: 30px;
+        background-color: white;
+        border: none;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+          rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+          rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+        cursor: pointer;
+      }
     `;
   }
 
@@ -98,7 +109,10 @@ class ExpenseInput extends LitElement {
             })}
           </tbody>
         </table>
-        <button @click="${this.logListener}">Add</button>
+        <button
+          class="submit"
+          @click="${this.logListener}"
+        >Add</button>
       </div>
     `;
   }

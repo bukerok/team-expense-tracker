@@ -5,6 +5,7 @@ class ExpenseTable extends LitElement {
   static get properties() {
     return {
       logs: { type: Array },
+      initialBalance: { type: Number },
     };
   }
 
@@ -97,14 +98,14 @@ class ExpenseTable extends LitElement {
   }
 
   getAccumulation(map) {
-    let result = 0;
+    let result = this.initialBalance || 0;
 
     Object.keys(map)
       .forEach((key) => {
-        result += map[key];
+        result -= map[key];
       });
 
-    return -result;
+    return result;
   }
 }
 
