@@ -386,7 +386,7 @@ const ee=new WeakMap,te=(se=e=>t=>{if(!(t instanceof b)||t instanceof N||"class"
                   <span>${t}</span>
                   <span
                     class="${te({card__value:!0,card__value_negative:s<0})}"
-                  >${s}</span>
+                  >${s.toFixed(2)}</span>
                 </div>
               `})}
       </div>
