@@ -92,6 +92,9 @@ class ExpenseTracker extends LitElement {
         },
       },
     ];
+    this.logs.sort((a, b) => {
+      return b._metadata.date - a._metadata.date;
+    });
     localStorage.setItem(EXPENSE_LOGS_KEY, JSON.stringify(this.logs));
     this.requestUpdate();
   }
