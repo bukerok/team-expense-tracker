@@ -167,6 +167,7 @@ class ExpenseInput extends LitElement {
         element.value = '';
       });
     this.resultData = {};
+    this.additionalData = [];
     this.requestUpdate();
   }
 
